@@ -56,3 +56,17 @@
 [15-Mar-2019 11:57:16 Europe/Moscow] PHP Warning:  Invalid argument supplied for foreach() in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 5
 [15-Mar-2019 12:02:57 Europe/Moscow] PHP Notice:  Undefined variable: vars in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 5
 [15-Mar-2019 12:02:57 Europe/Moscow] PHP Warning:  Invalid argument supplied for foreach() in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 5
+[15-Mar-2019 20:21:39 Europe/Moscow] PHP Warning:  include_once(D:\OpenServer\domains\easysite\app\admin\bueditor\bueditor.php): failed to open stream: No such file or directory in D:\OpenServer\domains\easysite\app\admin\index.php on line 253
+[15-Mar-2019 20:21:39 Europe/Moscow] PHP Warning:  include_once(): Failed opening 'D:\OpenServer\domains\easysite\app\admin/bueditor/bueditor.php' for inclusion (include_path='.;d:/openserver/modules/php/PHP-7-x64;d:/openserver/modules/php/PHP-7-x64/PEAR/pear') in D:\OpenServer\domains\easysite\app\admin\index.php on line 253
+[15-Mar-2019 20:22:22 Europe/Moscow] PHP Notice:  Undefined index: menu in D:\OpenServer\domains\easysite\app\admin\template\menu.inc.php on line 64
+[15-Mar-2019 20:22:26 Europe/Moscow] PHP Warning:  include_once(D:\OpenServer\domains\easysite\app\admin\bueditor\bueditor.php): failed to open stream: No such file or directory in D:\OpenServer\domains\easysite\app\admin\block.php on line 121
+[15-Mar-2019 20:22:26 Europe/Moscow] PHP Warning:  include_once(): Failed opening 'D:\OpenServer\domains\easysite\app\admin/bueditor/bueditor.php' for inclusion (include_path='.;d:/openserver/modules/php/PHP-7-x64;d:/openserver/modules/php/PHP-7-x64/PEAR/pear') in D:\OpenServer\domains\easysite\app\admin\block.php on line 121
+[15-Mar-2019 20:22:26 Europe/Moscow] PHP Notice:  Undefined variable: vars in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 22
+[15-Mar-2019 20:22:26 Europe/Moscow] PHP Warning:  Invalid argument supplied for foreach() in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 22
+[15-Mar-2019 20:22:28 Europe/Moscow] PHP Warning:  include_once(D:\OpenServer\domains\easysite\app\admin\bueditor\bueditor.php): failed to open stream: No such file or directory in D:\OpenServer\domains\easysite\app\admin\block.php on line 121
+[15-Mar-2019 20:22:28 Europe/Moscow] PHP Warning:  include_once(): Failed opening 'D:\OpenServer\domains\easysite\app\admin/bueditor/bueditor.php' for inclusion (include_path='.;d:/openserver/modules/php/PHP-7-x64;d:/openserver/modules/php/PHP-7-x64/PEAR/pear') in D:\OpenServer\domains\easysite\app\admin\block.php on line 121
+[15-Mar-2019 20:22:28 Europe/Moscow] PHP Notice:  Undefined variable: vars in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 22
+[15-Mar-2019 20:22:28 Europe/Moscow] PHP Warning:  Invalid argument supplied for foreach() in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 22
+[15-Mar-2019 20:23:11 Europe/Moscow] PHP Notice:  Undefined variable: vars in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 22
+[15-Mar-2019 20:23:11 Europe/Moscow] PHP Warning:  Invalid argument supplied for foreach() in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 22
+[15-Mar-2019 20:24:18 Europe/Moscow] PHP Notice:  Undefined index: menu in D:\OpenServer\domains\easysite\app\admin\template\menu.inc.php on line 64

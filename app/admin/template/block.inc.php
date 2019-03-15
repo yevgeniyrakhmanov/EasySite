@@ -1,6 +1,23 @@
+<script src='<? $config['sitelink']; ?>tinymce/tinymce.min.js'></script>
+<script>
+	tinymce.init({
+		selector: 'textarea',
+		language: 'ru',
 
-<?=$bueditor?>
+		plugins: [
+		    "advlist autolink lists link charmap print preview anchor image code",
+		    "searchreplace visualblocks code fullscreen",
+		    "insertdatetime media table contextmenu paste wordcount"
+		],
+		toolbar: "preview | undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | code image",
 
+		automatic_uploads: true,
+		images_upload_url: 'postAcceptor.php',
+		images_reuse_filename: true,
+		//images_upload_base_path: '../img'
+
+	});
+</script>
 <form action="" method="post">
 	<?php foreach ($vars as $i => $var) : ?>
 		<div class="form-group<?=(!isset($_GET['block']) || $_GET['block']!=$i)?' hide':''?>">

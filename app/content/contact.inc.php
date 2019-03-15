@@ -5,7 +5,7 @@ $title = 'Контакты';
 $keywords = 'ключевые слова';
 $description = 'Описание страницы';
 $template = 'info';
-$page_blocks = 'top_block';
+$page_blocks = '';
 
 # Содержание страницы
 $content = <<<EOF

@@ -47,7 +47,7 @@ $url= str_replace($config['sitelink'].'admin/','',strtolower (strtok($_SERVER['S
 					</ul>
 					<ul class="navbar-nav mr-0 ml-auto">
 						<li class="nav-item">
-							<a class="nav-link" href="<?=$config['sitelink']?>">Фронтенд</a>
+							<a class="nav-link" href="<?=$config['sitelink']?>" target="_blank">Фронтенд</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="logout.php" onclick="return confirm('Вы действительно хотите выйти?')">Выйти</a>

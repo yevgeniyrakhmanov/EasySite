@@ -249,8 +249,8 @@ else
 		';
 	}
 	
-	# Подключение редактора
-	include_once $path . 'bueditor/bueditor.php';
+	// # Подключение редактора
+	// include_once $path . 'bueditor/bueditor.php';
 
 	# Шаблон формы
 	ob_start();

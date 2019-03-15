@@ -16,7 +16,26 @@
 		return true;
 	}
 </script>
-<?=$bueditor?>
+<script src='<? $config['sitelink']; ?>tinymce/tinymce.min.js'></script>
+<script>
+	tinymce.init({
+		selector: 'textarea',
+		language: 'ru',
+
+		plugins: [
+		    "advlist autolink lists link charmap print preview anchor image code",
+		    "searchreplace visualblocks code fullscreen",
+		    "insertdatetime media table contextmenu paste wordcount"
+		],
+		toolbar: "preview | undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | code image",
+
+		automatic_uploads: true,
+		images_upload_url: 'postAcceptor.php',
+		images_reuse_filename: true,
+		//images_upload_base_path: '../img'
+
+	});
+</script>
 <form action="" method="post" onsubmit="return form_validator(this);">
 	<p class="text-danger small">Двойных кавычек в полях быть не должно!</p>
 	<div class="form-group">
