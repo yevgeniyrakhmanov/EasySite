@@ -2,8 +2,8 @@
 <html lang="ru">
 	<head>
 		<meta charset="<?=$config['encoding']?>" />
-		<title><?=$title?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title><?=$title?></title>
 		<meta name="keywords" content="<?=$keywords?>">
 		<meta name="description" content="<?=$description?>">
 		<link rel="stylesheet" href="<?=$config['sitelink']?>css/main.min.css">

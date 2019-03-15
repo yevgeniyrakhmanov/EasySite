@@ -1,0 +1,10 @@
+RewriteEngine Off
+
+Options -Indexes
+
+<Files "*.inc.php">
+order allow,deny
+deny from all
+</Files>
+
+ErrorDocument 404 /404.shtml
