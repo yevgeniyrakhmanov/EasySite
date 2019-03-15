@@ -70,3 +70,5 @@
 [15-Mar-2019 20:23:11 Europe/Moscow] PHP Notice:  Undefined variable: vars in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 22
 [15-Mar-2019 20:23:11 Europe/Moscow] PHP Warning:  Invalid argument supplied for foreach() in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 22
 [15-Mar-2019 20:24:18 Europe/Moscow] PHP Notice:  Undefined index: menu in D:\OpenServer\domains\easysite\app\admin\template\menu.inc.php on line 64
+[15-Mar-2019 20:38:19 Europe/Moscow] PHP Notice:  Undefined variable: vars in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 22
+[15-Mar-2019 20:38:19 Europe/Moscow] PHP Warning:  Invalid argument supplied for foreach() in D:\OpenServer\domains\easysite\app\admin\template\block.inc.php on line 22

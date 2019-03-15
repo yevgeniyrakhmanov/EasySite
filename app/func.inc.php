@@ -295,3 +295,40 @@ function GetTemplates()
 		$templates =false;
 	return $templates;
 }
+
+#Дополнительные модули
+
+# Выбор параметров страницы
+function GetContent($page, $var, $dir = '') {
+	$text = file_get_contents(dirname(__FILE__) . "/content/$dir$page");
+	preg_match('|\$'.$var.'[^\n]*\'([^\n]*)\';|Uisu', $text, $matches);
+	return (isset($matches[1])) ? $matches[1] : '';
+}
+
+# Сортировка страниц по дате создания файлов (вывод на страницу: GetSort('Название папки'))
+function GetSort($dir) {
+	$path = $dir;
+	$pages = array();
+
+	# Парсим папку content
+	$handle = opendir($path);
+
+	# Выбираем массив страниц
+	if ($handle != false) {
+		while (($file = readdir($handle)) !== false) {
+			if (is_file($path . $file)) {
+				$i = filemtime($path . $file) . ',' . $file;
+				$pages[$i] = $file;
+			}
+		}
+		closedir($handle);
+	}
+
+	# Сортируем массив
+	krsort($pages);
+
+    foreach ($pages as $i => $page) {
+		$title = GetContent($page, 'title');
+		echo '<p>'.$title.'</p>';
+    }
+}
