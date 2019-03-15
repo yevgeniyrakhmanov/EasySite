@@ -1,12 +1,12 @@
 <script type="text/javascript">
 	function form_validator(form)
 	{
-        if (form.page.value == '')
-		{
-			alert('Страница должна иметь название!');
-			form.page.focus();
-			return false;
-		}
+  //       if (form.page.value == '')
+		// {
+		// 	alert('Страница должна иметь название!');
+		// 	form.page.focus();
+		// 	return false;
+		// }
         if (form.title.value == '')
 		{
 			alert('Страница осталась без заголовка!');
@@ -38,11 +38,13 @@
 </script>
 <form action="" method="post" onsubmit="return form_validator(this);">
 	<p class="text-danger small">Двойных кавычек в полях быть не должно!</p>
-	<div class="form-group">
-		<input class="form-control" type="text" name="page" value="<?= (isset($form['page'])) ? $form['page'] : '';?>" placeholder="ЧПУ (имя файла и адрес страницы в строке браузера)">
+<!--
+ 	<div class="form-group">
+		<input class="form-control" type="hidden" name="page" value=" (isset($form['page'])) ? $form['page'] : ''; " placeholder="ЧПУ (имя файла и адрес страницы в строке браузера)">
 		<span class="text-danger small">Только латинские буквы любого регистра, цифры, минус и подчёркивание</span>
 	</div>
-	<div class="form-group">
+ -->
+ 	<div class="form-group">
 		<input class="form-control" type="text" name="title" value="<?= (isset($form['title'])) ? $form['title'] : '';?>" placeholder="Заголовок">
 	</div>
 	<div class="form-group">

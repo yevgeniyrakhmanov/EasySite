@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		$page_content = array();
 		# Обработка данных
-		$page = trim($_POST['page']);
+		$page = trim(str2url($_POST['title']));
 		$dir = trim($_POST['dir']);
 		$page_content['title'] = trim($_POST['title']);
 		$page_content['keywords'] = (isset($_POST['keywords'])) ? trim($_POST['keywords']) : '';
@@ -84,9 +84,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 else
 {
+
 	# Создание раздела
 	if (isset($_GET['new_dir']))
 	{
+		$_GET['new_dir'] = str2url($_GET['new_dir']);
 		if (!is_dir($path . '/../content/' . $_GET['new_dir']))
 			mkdir($path . '/../content/' . $_GET['new_dir']);
 		header ('Location: ' . $config['sitelink'] . 'admin/');
@@ -134,12 +136,13 @@ else
 	elseif (isset($_GET['dir']))
 	{
 		$dir = trim($_GET['dir'], '/') . '/';
+		$rudir = url2str($dir);
 		# Выбор всех страниц в папке content/
 		$pages = GetPages($dir);
 		
 		# Описание страницы
 		$page_content = '
-			<h2 class="text-center">Раздел ' . $dir . '  </h2>
+			<h2 class="text-center">Раздел <span class="text-uppercase">«' . $rudir . '»</span></h2>
 			<div class="d-flex justify-content-between mt-3 mb-3">
 				<a class="btn btn-primary" href="' . $config['sitelink'] . 'admin/"><i class="fas fa-angle-left"></i> Вернуться в Корневой раздел</a>
 				<form method="get">
@@ -172,7 +175,7 @@ else
 			<div class="row">
 				<div class="col-md-12">
 					<div class="alert alert-secondary">
-						<strong>Добавить новую страницу в раздел ' . $dir . '</strong>';
+						<strong>Добавить новую страницу в раздел «' . $rudir . '»</strong>';
 	}
 	# Вывод списка страниц
 	else
@@ -194,8 +197,11 @@ else
 		# Вывод разделов
 		if (!empty($dirs))
 		{
-			foreach ($dirs as $i => $dir)
-				$dir_content .= "<li class='list-group-item'><a href='?dir=$dir/'>$dir</a></li>";
+			foreach ($dirs as $i => $dir){
+				$rudir = url2str($dir);
+				$dir_content .= "
+					<li class='list-group-item'><a href='?dir=$dir/'>$rudir</a></li>";
+			}
 		}
 		else
 			$dir_content .= '<li class="list-group-item">Разделов нет.</li>';
@@ -212,7 +218,6 @@ else
 					<form mathod="get">
 						<div class="form-group">
 							<input class="form-control form-control" type="text" name="new_dir" placeholder="Название раздела">
-							<span class="text-danger small">Только латинские буквы любого регистра, цифры, минус и подчёркивание</span>
 						</div>
 						<div class="form-group">
 							<button type="submit" class="btn btn-success">Создать раздел</button>
