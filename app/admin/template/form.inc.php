@@ -36,6 +36,11 @@
 
 	});
 </script>
+<!-- 
+  $timezone = "Europe/Kiev";
+  date_default_timezone_set($timezone);
+  $today = date("d.m.Y");
+ -->
 <form action="" method="post" onsubmit="return form_validator(this);">
 	<p class="text-danger small">Двойных кавычек в полях быть не должно!</p>
 <!--
@@ -44,6 +49,9 @@
 		<span class="text-danger small">Только латинские буквы любого регистра, цифры, минус и подчёркивание</span>
 	</div>
  -->
+ 	<div class="form-group">
+		<input class="form-control" type="hidden" name="date" value="<?= (isset($form['date'])) ? $form['date'] : '';?>">
+	</div>
  	<div class="form-group">
 		<input class="form-control" type="text" name="title" value="<?= (isset($form['title'])) ? $form['title'] : '';?>" placeholder="Заголовок">
 	</div>

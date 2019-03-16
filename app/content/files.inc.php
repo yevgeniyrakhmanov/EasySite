@@ -9,15 +9,16 @@ $page_blocks = 'reviews, donate';
 
 # Содержание страницы
 $content = <<<EOF
-<p>Все страницы хранятся в папке <code>сontent/</code>, а дизайн в папке <code>template/</code>. Изображения предполагается хранить в папке <code>img/</code>.</p>
+<p>Все страницы хранятся в папке <strong>сontent/</strong>, а дизайн в папке <strong>template/</strong>. Изображения предполагается хранить в папке <strong>i/</strong>.</p>
 
-<p>Если хочется добавить функции, то дописывайте их в <code>func.inc.php</code>. А также можно добавлять настройки в <code>config.inc.php</code>.</p>
+<p>Если хочется добавить функции, то дописывайте их в <strong>func.inc.php</strong>. А также можно добавлять настройки в <strong>config.inc.php</strong>.</p>
 
-<p>И конечно важнейшие файлы: основной индексный файл <code>index.php</code> и специальный файл для конфигурации сервера <code>.htaccess</code>.</p>
+<p>И конечно важнейшие файлы: основной индексный файл <strong>index.php</strong> и специальный файл для конфигурации сервера <strong>.htaccess</strong>.</p>
 
 <h2>Файлы дистрибутива</h2>
 
 <pre>
+<code>
 <strong>admin</strong>/ # папка с файлами админки
 <strong>content</strong>/index.inc.php	# файлы контента
 <strong>content</strong>/install.inc.php
@@ -36,11 +37,12 @@ $content = <<<EOF
 config.inc.php # файл конфигурации
 func.inc.php # библиотека функций
 index.php # главный файл
+</code>
 </pre>
 
 <h2>Ограничение доступа</h2>
 
-<p>Если вы хотите, чтобы файл был доступен в браузере напрямую, то давайте ему расширение <code>*.php</code>. Иначе <code>*.inc.php</code>.</p>
+<p>Если вы хотите, чтобы файл был доступен в браузере напрямую, то давайте ему расширение <strong>*.php</strong>. Иначе <strong>*.inc.php</strong>.</p>
 EOF;
 
 $highlight_enabled = true;

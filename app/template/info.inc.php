@@ -30,7 +30,18 @@
 		<div class="container-fluid">
 			<div class="row">
 				<article class="col-lg-8 mt-3">
+					<?php
+						if(isset($category)){
+							echo '<p class="text-muted small mb-0 mt-3">' . $category . '</p>';
+						}
+					?>
 					<h1><?=$title;?></h1>
+					<?php
+						if(isset($date)){
+							echo '<p class="text-muted small">' . $date . '</p>';
+						}
+					?>
+					
 					<?=$content;?>
 				</article>
 				<aside class="col-lg-4 mt-3 sticky-top">

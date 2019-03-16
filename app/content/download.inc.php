@@ -14,6 +14,6 @@ $content = <<<EOF
 	<p>Выбирайте версию и жмите кнопку «Скачать».</p>
 	<hr/>
 	<h3>Скачать актуальную версию вы всегда сможете на оффсайте проекта</h3>
-	<p>Для перехода на страницу даунлоада нажмите: <a href="http://microtext.pp.ua/download.html" class="btn btn-primary">Скачать</a></p>
+	<p>Для перехода на страницу даунлоада нажмите: <a href="http://microtext.info/download.html" class="btn btn-primary">Скачать</a></p>
 	<hr/>
 EOF;

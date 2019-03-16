@@ -38,8 +38,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		$page_content = array();
 		# Обработка данных
+
+		# Eсли надо корень сайта
+		// $root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/'; // 
+
 		$page = trim(str2url($_POST['title']));
 		$dir = trim($_POST['dir']);
+
+		$page_content['category'] = lat2rus($dir);
+
+		$filename = $page . '.inc.php';
+		$page_content['link'] = $filename;
+
+		# Попытка автоматического присвоения переменной даты создания файла.
+		# Присваивается со второго сохранения файла, потому что ранее файл отсутствовал.
+		# Без проверки существования файла - выдает ошибку, хотя дату в переменную вносит
+		// $root = $_SERVER['DOCUMENT_ROOT'];
+		// $filelink = $root . '/content/' . $dir . $filename;
+		// $page_content['date'] = '';
+		// if (file_exists($filelink)) {
+		// 	$page_content['date'] = date("d.m.Y", filectime($filelink));
+		// }
+
+		# Попытка 2
+		// $page_content['date'] = (isset($_POST['date'])) ? trim($_POST['date']) : '';
+
+		# Попытка 3
+		# Немного по-другому: если файл есть, оставляем дату, когда он был создан, а если файл новый - присваиваем сегодняшнюю дату.
+		$root = $_SERVER['DOCUMENT_ROOT'];
+		$filelink = $root . '/content/' . $dir . $filename;
+		if (file_exists($filelink)) {
+			$page_content['date'] = trim($_POST['date']);
+		}
+		else {
+			$timezone = "Europe/Kiev";
+			date_default_timezone_set($timezone);
+			$today = date("d.m.Y");
+			$page_content['date'] = $today;
+		}
+
 		$page_content['title'] = trim($_POST['title']);
 		$page_content['keywords'] = (isset($_POST['keywords'])) ? trim($_POST['keywords']) : '';
 		$page_content['description'] = (isset($_POST['description'])) ? trim($_POST['description']) : '';
@@ -111,6 +148,9 @@ else
 		$dir = (isset($_GET['dir']) && $_GET['dir'] != '/') ? trim($_GET['dir'], '/') . '/' : '';
 		$form['oldpage'] = $form['page'] = $_GET['page'];
 
+		$form['link'] = GetContent($page, 'link', $dir);
+		$form['date'] = GetContent($page, 'date', $dir);
+		$form['category'] = GetContent($page, 'category', $dir);
 		$form['title'] = GetContent($page, 'title', $dir);
 		$form['keywords'] = GetContent($page, 'keywords', $dir);
 		$form['description'] = GetContent($page, 'description', $dir);

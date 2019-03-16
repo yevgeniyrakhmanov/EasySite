@@ -15,7 +15,7 @@ $content = <<<EOF
 
 <h2>Настройка доступа</h2>
 
-<p>Если хотите задать логин и пароль из конфига, то добавьте в <code>config.inc.php</code>:</p>
+<p>Если хотите задать логин и пароль из конфига, то добавьте в <strong>config.inc.php</strong>:</p>
 
 <pre>
 <code class="php">
@@ -25,7 +25,7 @@ $content = <<<EOF
 </code>
 </pre>
 
-<p>В самое начало страницы (например, <code>content/secret.inc.php</code>) сразу после <code>	&lt;?php</code> нужно добавить код:</p>
+<p>В самое начало страницы (например, <strong>content/secret.inc.php</strong>) сразу после <strong>	&lt;?php</strong> нужно добавить код:</p>
 
 <pre>
 <code class="php">

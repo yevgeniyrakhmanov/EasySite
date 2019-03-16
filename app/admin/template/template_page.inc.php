@@ -1,5 +1,8 @@
 
 # Данные о странице
+$link = '<?=$page_content['link']?>';
+$date = '<?=$page_content['date']?>';
+$category = '<?=$page_content['category']?>';
 $title = '<?=$page_content['title']?>';
 $keywords = '<?=$page_content['keywords']?>';
 $description = '<?=$page_content['description']?>';
