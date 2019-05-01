@@ -32,23 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		$settings = $_POST['settings'];
 
-		$file = SetConfig($path, $file, "config\['sitename']", $settings['sitename']);				
+		$file = SetConfig($path, $file, 'config\[\'sitename\']', $settings['sitename']);				
 		$file = SetConfig($path, $file, 'config\[\'slogan\']', $settings['slogan']);		
 		$file = SetConfig($path, $file, 'config\[\'encoding\']', $settings['encoding']);		
 		$file = SetConfig($path, $file, 'config\[\'template\']', $settings['template']);
 		$file = SetConfig($path, $file, 'config\[\'login\']', $settings['login']);
 		$file = SetConfig($path, $file, 'config\[\'password\']', $settings['password']);		
-		$file = SetConfig($path, $file, 'config\[\'secretWord\']', $settings['secretWord']);		
-		$file = SetConfig($path, $file, 'config\[\'email\'\]\[\'receiver\']', $settings['email']['receiver']);		
-		$file = SetConfig($path, $file, 'config\[\'email\'\]\[\'subject\'\]', $settings['email']['subject']);		
-		$file = SetConfig($path, $file, 'config\[\'form\'\]\[\'feedback\'\]\[\'subject\']', $settings['form']['feedback']['subject']);		
-		$file = SetConfig($path, $file, 'config\[\'form\'\]\[\'feedbackSent\'\]', $settings['form']['feedbackSent']);		
-		$file = SetConfig($path, $file, 'config\[\'form\'\]\[\'notSent\'\]', $settings['form']['notSent']);		
-		$file = SetConfig($path, $file, 'config\[\'form\'\]\[\'isSpam\'\]', $settings['form']['isSpam']);		
-		$file = SetConfig($path, $file, 'config\[\'form\'\]\[\'emptyEmail\'\]', $settings['form']['emptyEmail']);		
-		$file = SetConfig($path, $file, 'config\[\'form\'\]\[\'emptyName\'\]', $settings['form']['emptyName']);		
-		$file = SetConfig($path, $file, 'config\[\'form\'\]\[\'emptyTopic\'\]', $settings['form']['emptyTopic']);		
-		$file = SetConfig($path, $file, 'config\[\'form\'\]\[\'emptyMessage\'\]', $settings['form']['emptyMessage']);		
+		$file = SetConfig($path, $file, 'config\[\'emailadmin\']', $settings['emailadmin']);		
+		$file = SetConfig($path, $file, 'config\[\'emailsubject\']', $settings['emailsubject']);		
 		SaveConfig($path, $file);
 	}
 	# Перенаправление на главную админки
@@ -58,23 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 else
 {
 	# Выбор конфига	
-	$settings['sitename'] = GetConfig($file, "config\['sitename']");
+	$settings['sitename'] = GetConfig($file, 'config\[\'sitename\']');
 	$settings['slogan'] = GetConfig($file, 'config\[\'slogan\']');
 	$settings['encoding'] = GetConfig($file, 'config\[\'encoding\']');
 	$settings['template'] = GetConfig($file, 'config\[\'template\']');
 	$settings['login'] = GetConfig($file, 'config\[\'login\']');
 	$settings['password'] = GetConfig($file, 'config\[\'password\']');
-	$settings['secretWord'] = GetConfig($file, 'config\[\'secretWord\']');
-	$settings['email']['receiver'] = GetConfig($file, 'config\[\'email\'\]\[\'receiver\']');
-	$settings['email']['subject'] = GetConfig($file, 'config\[\'email\'\]\[\'subject\'\]');
-	$settings['form']['feedback']['subject'] = GetConfig($file, 'config\[\'form\'\]\[\'feedback\'\]\[\'subject\'\]');
-	$settings['form']['feedbackSent'] = GetConfig($file, 'config\[\'form\'\]\[\'feedbackSent\'\]');
-	$settings['form']['notSent'] = GetConfig($file, 'config\[\'form\'\]\[\'notSent\'\]');
-	$settings['form']['isSpam'] = GetConfig($file, 'config\[\'form\'\]\[\'isSpam\'\]');
-	$settings['form']['emptyEmail'] = GetConfig($file, 'config\[\'form\'\]\[\'emptyEmail\'\]');
-	$settings['form']['emptyName'] = GetConfig($file, 'config\[\'form\'\]\[\'emptyName\'\]');
-	$settings['form']['emptyTopic'] = GetConfig($file, 'config\[\'form\'\]\[\'emptyTopic\'\]');
-	$settings['form']['emptyMessage'] = GetConfig($file, 'config\[\'form\'\]\[\'emptyMessage\'\]');	
+	$settings['emailadmin'] = GetConfig($file, 'config\[\'emailadmin\']');
+	$settings['emailsubject'] = GetConfig($file, 'config\[\'emailsubject\']');
 
 	# Шаблон формы
 	ob_start();

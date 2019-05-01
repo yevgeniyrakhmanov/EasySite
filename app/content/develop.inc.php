@@ -3,7 +3,7 @@
 $title = 'Описание установки и наполнения сайта на движке microText';
 $keywords = '';
 $description = '';
-$template = 'info';
+$template = 'page';
 $page_blocks = 'reviews, donate';
 
 # Содержание страницы

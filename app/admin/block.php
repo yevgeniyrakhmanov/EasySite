@@ -74,15 +74,17 @@ else
 	if(isset($_GET['block']))
 	{
 		$names = GetBlocksNames();
-		
+
 		foreach ($names as $name)
 		{
 			$vars[$name] = GetBlockContent($name);
 		}
 
 		$content = '
-		<a href="' . $config['sitelink'] . 'admin/block.php">Вернуться к списку блоков</a>
-		<strong>Редактирование блока</strong>';
+		<p><a class="btn btn-primary" href="' . $config['sitelink'] . 'admin/block.php"><i class="fas fa-angle-left mr-3"></i> Вернуться к списку блоков</a></p>
+		<div>
+			<div>
+		';
 	}
 	# Вывод списка блоков блока
 	else
@@ -90,35 +92,30 @@ else
 		$names = GetBlocksNames();
 		
 		$content ='
-			<p class="text-center small">Здесь можно редактировать Блоки.</p>
 			<div class="row">
-				<div class="col-md-12">
-					<div class="alert alert-success">
-						<strong>Список блоков</strong>
-						<ul class="list-group">
-		';
+				<div class="col-12">
+					<ul class="list-group">';
 		
 		foreach ($names as $name)
 		{
 			$vars[$name] = GetBlockContent($name);
+			$name_rus = lat2rus($name);
 			$content .= '
-							<li class="list-group-item"><a href="'.$config['sitelink'].'admin/block.php?block='.$name.'">'.$name.'</a></li>
+						<li class="list-group-item input-group">
+							<a class="d-flex justify-content-between btn text-primary" href="'.$config['sitelink'].'admin/block.php?block='.$name.'" title="Редактировать блок «'.$name_rus.'»">
+								<span><i class="fas fa-angle-right mr-3"></i> '.$name_rus.'</span> <i class="fas fa-edit"></i>
+							</a>
+						</li>
 			';
 		}
 			
-		$content .= '
-						</ul>
-					</div>
+		$content .= '</ul>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="alert alert-secondary">
-						<strong>Добавить новый блок</strong>
-		';
+			<p><a class="btn btn-success mt-3" data-toggle="collapse" href="#addblock">Добавить новый блок <i class="fas fa-angle-down ml-3"></i></a></p>
+			<div class="row collapse" id="addblock">
+				<div class="col-12">';
 	}
-// # Подключение редактора
-// include_once $path . 'bueditor/bueditor.php';
 
 # Шаблон формы
 ob_start();

@@ -19,7 +19,7 @@ header('Content-type: text/html; charset=' . $config['encoding']);
 
 # Редирект для индексных файлов
 $request_uri = str_replace($config['sitelink'], '', 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
-if ($request_uri == 'index.php' || $request_uri == 'index.html')
+if ($request_uri == 'index.php' || $request_uri == 'index.html' || $request_uri == 'index')
 	header('Location: ' . $config['sitelink']);
 
 # Подключение библиотеки функций
@@ -28,6 +28,13 @@ $get_menu_items = 'GetMenuItems';
 $get_complex_menu_items = 'GetComplexMenuItems';
 $get_menu_items_u = 'GetMenuItemsU';
 $get_block = 'GetBlock';
+$get_post_list = 'GetPostList';
+$get_all_posts = 'GetAllPosts';
+$get_product_list = 'GetProductList';
+$get_categories = 'GetCategories';
+$get_all_products = 'GetAllProducts';
+$get_rubric = 'GetRubric';
+$get_gallery = 'GetGallery';
 
 # Определение текущей страницы
 $page = $this_page = (isset($_GET['content'])) ? $_GET['content'] : 'index';
@@ -43,7 +50,11 @@ include_once $path . 'template/blocks.inc.php';
 # Подключение страницы или вывод ошибки
 if ($category != '')
 {
-	if (is_file($path . "content/$category/$page.inc.php"))
+	if (is_file($path . "contentproducts/$category/$page.inc.php"))
+		include_once $path . "contentproducts/$category/$page.inc.php";
+	elseif (is_file($path . "contentposts/$category/$page.inc.php"))
+		include_once $path . "contentposts/$category/$page.inc.php";
+	elseif (is_file($path . "content/$category/$page.inc.php"))
 		include_once $path . "content/$category/$page.inc.php";
 	else
 		error404(true, $config['encoding']);

@@ -4,7 +4,7 @@
 $title = 'Скачать бесплатный движок для сайтов microText';
 $keywords = 'microText, скачать бесплатно, движок для сайта';
 $description = 'Здесь вы можете бесплатно скачать суперлёгкий движок для сайтов microText';
-$template = 'info';
+$template = 'page';
 $page_blocks = 'reviews, donate';
 
 # Содержание страницы

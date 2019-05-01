@@ -4,7 +4,7 @@
 $title = 'Подключение шаблона к microText';
 $keywords = '';
 $description = '';
-$template = 'info';
+$template = 'page';
 $page_blocks = 'reviews, donate';
 
 # Содержание страницы

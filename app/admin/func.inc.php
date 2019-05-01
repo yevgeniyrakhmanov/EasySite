@@ -199,11 +199,11 @@ function GetConfig($text, $var)
 # Определение значений переменных конфига
 function SetConfig($path, $file, $var_name, $var)
 {	
-	preg_match('|(\$'.$var_name.'[\s]*=\s\'*?)[^\n]*(\'*?;\s#)|Uisu', $file, $matches);
+	preg_match('|(\$'.$var_name.'[\s]*=\s\')[^\n]*(\';\s#)|Uisu', $file, $matches);
 
 	$repl = $matches[1] . $var . $matches[2];
-	
-	return preg_replace('|\$'.$var_name.'[\s]*=\s\'*?([^\n]*)\'?;\s#|Uisu', $repl, $file);	
+
+	return preg_replace('|\$'.$var_name.'[\s]*=\s\'([^\n]*)\';\s#|Uisu', $repl, $file);
 }
 # Сохранение файла конфигов
 function SaveConfig($file, $content)
@@ -429,11 +429,19 @@ function CleanDir($folder)
 
 # Дополнительные модули
 
-# Транслитерация с русского на латинницу
+function delquotes($string) {
+    $converter = array(
+        '\'' => '',
+        '"' => '',
+    );
+    return strtr($string, $converter);
+}
+
+# Транслитерация с русского и диакритики на латиницу
 function rus2lat($string) {
     $converter = array(
         'а' => 'a',   'б' => 'b',   'в' => 'v',
-        'г' => 'g',   'д' => 'd',   'е' => 'e',
+        'г' => 'g',   'д' => 'd',   'е' => 'je',
         'ё' => 'jo',   'ж' => 'zh',  'з' => 'z',
         'и' => 'i',   'й' => 'j',   'к' => 'k',
         'л' => 'l',   'м' => 'm',   'н' => 'n',
@@ -441,11 +449,14 @@ function rus2lat($string) {
         'с' => 's',   'т' => 't',   'у' => 'u',
         'ф' => 'f',   'х' => 'h',   'ц' => 'c',
         'ч' => 'ch',  'ш' => 'sh',  'щ' => 'shh',
-        'ь' => '\'',  'ы' => 'y',   'ъ' => 'q',
-        'э' => 'e`',   'ю' => 'ju',  'я' => 'ja',
-        
+        'ь' => 'w',  'ы' => 'y',   'ъ' => 'q',
+        'э' => 'e',   'ю' => 'ju',  'я' => 'ja',
+        ' '  => '_',  '-' => '-', '/' => '',
+
+        // '\'' => '',
+
         'А' => 'A',   'Б' => 'B',   'В' => 'V',
-        'Г' => 'G',   'Д' => 'D',   'Е' => 'E',
+        'Г' => 'G',   'Д' => 'D',   'Е' => 'JE',
         'Ё' => 'JO',   'Ж' => 'ZH',  'З' => 'Z',
         'И' => 'I',   'Й' => 'J',   'К' => 'K',
         'Л' => 'L',   'М' => 'M',   'Н' => 'N',
@@ -453,8 +464,20 @@ function rus2lat($string) {
         'С' => 'S',   'Т' => 'T',   'У' => 'U',
         'Ф' => 'F',   'Х' => 'H',   'Ц' => 'C',
         'Ч' => 'CH',  'Ш' => 'SH',  'Щ' => 'SHH',
-        'Ь' => '\'',  'Ы' => 'Y',   'Ъ' => 'Q',
-        'Э' => 'E`',   'Ю' => 'JU',  'Я' => 'JA',
+        'Ь' => 'W',  'Ы' => 'Y',   'Ъ' => 'Q',
+        'Э' => 'E',   'Ю' => 'JU',  'Я' => 'JA',
+
+        'É' => 'E',   'À' => 'A',  'È' => 'E',
+        'Ù' => 'U',   'Â' => 'A',  'Ê' => 'E',
+        'Î' => 'I',   'Ô' => 'O',  'Û' => 'U',
+        'Ç' => 'C',   'Ë' => 'E',  'Ï' => 'I',
+        'Ü' => 'U',   'Ÿ' => 'Y',
+        'é' => 'e',   'à' => 'a',  'è' => 'e',
+        'ù' => 'u',   'â' => 'a',  'ê' => 'e',
+        'î' => 'i',   'ô' => 'o',  'û' => 'u',
+        'ç' => 'c',   'ë' => 'e',  'ï' => 'i',
+        'ü' => 'u',   'ÿ' => 'y', 
+      
     );
     return strtr($string, $converter);
 }
@@ -470,11 +493,11 @@ function str2url($str) {
     return $str;
 }
 
-# Транслитерация с латинницы на русский
+# Транслитерация с латиницы на русский
 function lat2rus($string) {
     $converter = array(
         'а' => 'a',   'b' => 'б',   'v' => 'в',
-        'g' => 'г',   'd' => 'д',   'e' => 'е',
+        'g' => 'г',   'd' => 'д',   'je' => 'е',
         'jo' => 'ё',  'zh' => 'ж',  'z' => 'з',
         'i' => 'и',   'j' => 'й',   'k' => 'к',
         'l' => 'л',   'm' => 'м',   'n' => 'н',
@@ -482,12 +505,12 @@ function lat2rus($string) {
         's' => 'с',   't' => 'т',   'u' => 'у',
         'f' => 'ф',   'h' => 'х',   'c' => 'ц',
         'ch' => 'ч',  'sh' => 'ш',  'shh' => 'щ',
-        '\'' => 'ь',  'y' => 'ы',   'q' => 'ъ',
-        'e`' => 'э',  'ju' => 'ю', 'ja' => 'я',
-        '_'  => ' ',  '-' => ' ', '/' => '',
+        'w' => 'ь',  'y' => 'ы',   'q' => 'ъ',
+        'e' => 'э',  'ju' => 'ю', 'ja' => 'я',
+        '_'  => ' ',  '-' => '-', '/' => '',
 
         'A' => 'А',   'B' => 'Б',   'V' => 'В',
-        'G' => 'Г',   'D' => 'Д',   'E' => 'Е',
+        'G' => 'Г',   'D' => 'Д',   'JE' => 'Е',
         'JO' => 'Ё',  'ZH' => 'Ж',  'Z' => 'З',
         'I' => 'И',   'J' => 'Й',   'K' => 'К',
         'L' => 'Л',   'M' => 'М',   'N' => 'Н',
@@ -495,8 +518,8 @@ function lat2rus($string) {
         'S' => 'С',   'T' => 'Т',   'U' => 'У',
         'F' => 'Ф',   'H' => 'Х',   'C' => 'Ц',
         'CH' => 'Ч',  'SH' => 'Ш',  'SHH' => 'Щ',
-        'Y' => 'Ы',   'Q' => 'Ъ',
-        'E`' => 'Э',  'JU' => 'Ю', 'JA' => 'Я',
+        'W' => 'Ь',  'Y' => 'Ы',   'Q' => 'Ъ',
+        'E' => 'Э',  'JU' => 'Ю', 'JA' => 'Я',
     );
     return strtr($string, $converter);
 }
@@ -505,6 +528,205 @@ function url2str($str) {
     $str = lat2rus($str);
     return $str;
 }
+
+
+
+
+
+# P R O D U C T S
+# Сохранение контента существующей страницы в файл
+function SavePHP1products($path, $page_content, $oldpage, $page, $dir)
+{
+	$content = file_get_contents($path . "../contentproducts/$dir$oldpage.inc.php");
+
+	foreach ($page_content as $name => $var)
+	{
+		if ($name == 'content')
+		{
+			$repl = '$content = <<<EOF'."\n".$var."\n".'EOF;';
+			$content = preg_replace('|\$'.$name.'\s*=\s*<<<EOF.*EOF;|Uisu', $repl, $content);
+		}
+		else
+		{
+			$repl = "$".$name." = '".$var."';\n"; 
+			$content = preg_replace('|\$'.$name.'\s*=\s*.[^\n]*\n|Uisu', $repl, $content);
+		}
+	}
+	return (file_put_contents($path . "../contentproducts/$dir$page.inc.php", stripslashes($content)));
+}
+# Выборка всех страниц контента
+function GetProducts($dir = null)
+{
+	$path = dirname(__FILE__) . "/../contentproducts/$dir";
+	$pages = array();
+
+	# Парсим папку contentproducts
+	$handle = opendir($path);
+
+	# Выбираем массив страниц
+	if ($handle != false)
+	{
+		while (($file = readdir($handle)) !== false)
+		{
+			if (is_file($path . $file))
+			{
+				$i = strtok($file, '.');
+				$pages[$i] = $file;
+			}
+		}
+
+		closedir($handle);
+	}
+
+	# Сортируем массив
+	natsort($pages);
+
+	return $pages;
+}
+# Выборка всех подпапок
+function GetCategories($dir = null)
+{
+	$path = dirname(__FILE__) . '/../contentproducts/';
+	$dirs = array();
+
+	# Парсим папку contentproducts
+	$handle = opendir($path);
+
+	# Выбираем массив страниц
+	if ($handle != false)
+	{
+		while (($dir = readdir($handle)) !== false)
+			if (is_dir($path . $dir) && $dir != '..' && $dir != '.')
+				$dirs[] = $dir;
+
+		closedir($handle);
+	}
+
+	# Сортируем массив
+	natsort($dirs);
+
+	return $dirs;
+}
+# Выбор параметров страницы
+function GetContentProducts($page, $var, $dir = '')
+{
+	$text = file_get_contents(dirname(__FILE__) . "/../contentproducts/$dir$page");
+	preg_match('|\$'.$var.'[^\n]*\'([^\n]*)\';|Uisu', $text, $matches);
+	return (isset($matches[1])) ? $matches[1] : '';
+}
+# Извлечение блока скриптов
+function GetScriptProducts($page)
+{
+	$text = file_get_contents(dirname(__FILE__) . "/../contentproducts/$page");
+	preg_match('|#script start(.*)#script end|Uisu', $text, $matches);
+	return (isset($matches[1])) ? $matches[1] : '';
+}
+
+# P O S T S
+function SavePHP1posts($path, $page_content, $oldpage, $page, $dir)
+{
+	$content = file_get_contents($path . "../contentposts/$dir$oldpage.inc.php");
+
+	foreach ($page_content as $name => $var)
+	{
+		if ($name == 'content')
+		{
+			$repl = '$content = <<<EOF'."\n".$var."\n".'EOF;';
+			$content = preg_replace('|\$'.$name.'\s*=\s*<<<EOF.*EOF;|Uisu', $repl, $content);
+		}
+		else
+		{
+			$repl = "$".$name." = '".$var."';\n"; 
+			$content = preg_replace('|\$'.$name.'\s*=\s*.[^\n]*\n|Uisu', $repl, $content);
+		}
+	}
+	return (file_put_contents($path . "../contentposts/$dir$page.inc.php", stripslashes($content)));
+}
+# Выборка всех страниц контента
+function GetPosts($dir = null)
+{
+	$path = dirname(__FILE__) . "/../contentposts/$dir";
+	$pages = array();
+
+	# Парсим папку contentposts
+	$handle = opendir($path);
+
+	# Выбираем массив страниц
+	if ($handle != false)
+	{
+		while (($file = readdir($handle)) !== false)
+		{
+			if (is_file($path . $file))
+			{
+				$i = strtok($file, '.');
+				$pages[$i] = $file;
+			}
+		}
+
+		closedir($handle);
+	}
+
+	# Сортируем массив
+	natsort($pages);
+
+	return $pages;
+}
+# Выборка всех подпапок
+function GetRubric($dir = null)
+{
+	$path = dirname(__FILE__) . '/../contentposts/';
+	$dirs = array();
+
+	# Парсим папку contentposts
+	$handle = opendir($path);
+
+	# Выбираем массив страниц
+	if ($handle != false)
+	{
+		while (($dir = readdir($handle)) !== false)
+			if (is_dir($path . $dir) && $dir != '..' && $dir != '.')
+				$dirs[] = $dir;
+
+		closedir($handle);
+	}
+
+	# Сортируем массив
+	natsort($dirs);
+
+	return $dirs;
+}
+# Выбор параметров страницы
+function GetContentPosts($page, $var, $dir = '')
+{
+	$text = file_get_contents(dirname(__FILE__) . "/../contentposts/$dir$page");
+	preg_match('|\$'.$var.'[^\n]*\'([^\n]*)\';|Uisu', $text, $matches);
+	return (isset($matches[1])) ? $matches[1] : '';
+}
+# Извлечение блока скриптов
+function GetScriptPosts($page)
+{
+	$text = file_get_contents(dirname(__FILE__) . "/../contentposts/$page");
+	preg_match('|#script start(.*)#script end|Uisu', $text, $matches);
+	return (isset($matches[1])) ? $matches[1] : '';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

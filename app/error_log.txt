@@ -1,0 +1,71 @@
+[26-Apr-2019 00:12:58 Europe/Moscow] PHP Warning:  include_once(D:\OpenServer\domains\easysite\app/template/info.inc.php): failed to open stream: No such file or directory in D:\OpenServer\domains\easysite\app\index.php on line 82
+[26-Apr-2019 00:12:58 Europe/Moscow] PHP Warning:  include_once(): Failed opening 'D:\OpenServer\domains\easysite\app/template/info.inc.php' for inclusion (include_path='.;d:/openserver/modules/php/PHP-7-x64;d:/openserver/modules/php/PHP-7-x64/PEAR/pear') in D:\OpenServer\domains\easysite\app\index.php on line 82
+[30-Apr-2019 17:55:41 Europe/Moscow] PHP Notice:  Undefined variable: get_post_list in D:\OpenServer\domains\easysite\app\content\blog\Pravo.inc.php on line 15
+[30-Apr-2019 17:55:41 Europe/Moscow] PHP Fatal error:  Uncaught Error: Function name must be a string in D:\OpenServer\domains\easysite\app\content\blog\Pravo.inc.php:15
+Stack trace:
+#0 D:\OpenServer\domains\easysite\app\index.php(66): include_once()
+#1 {main}
+  thrown in D:\OpenServer\domains\easysite\app\content\blog\Pravo.inc.php on line 15
+[30-Apr-2019 21:02:53 Europe/Moscow] PHP Notice:  Undefined variable: config in D:\OpenServer\domains\easysite\app\func.inc.php on line 397
+[30-Apr-2019 22:16:47 Europe/Moscow] PHP Warning:  opendir(D:\OpenServer\domains\easysite\app/contentposts/Pravo/,D:\OpenServer\domains\easysite\app/contentposts/Pravo/): �� ������ ����� �������� ����. (code: 2) in D:\OpenServer\domains\easysite\app\func.inc.php on line 363
+[30-Apr-2019 22:16:47 Europe/Moscow] PHP Warning:  opendir(D:\OpenServer\domains\easysite\app/contentposts/Pravo/): failed to open dir: No such file or directory in D:\OpenServer\domains\easysite\app\func.inc.php on line 363
+[30-Apr-2019 22:16:57 Europe/Moscow] PHP Warning:  opendir(D:\OpenServer\domains\easysite\app/contentposts/Pravo/,D:\OpenServer\domains\easysite\app/contentposts/Pravo/): �� ������ ����� �������� ����. (code: 2) in D:\OpenServer\domains\easysite\app\func.inc.php on line 363
+[30-Apr-2019 22:16:57 Europe/Moscow] PHP Warning:  opendir(D:\OpenServer\domains\easysite\app/contentposts/Pravo/): failed to open dir: No such file or directory in D:\OpenServer\domains\easysite\app\func.inc.php on line 363
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\404.inc.php on line 7
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: keywords in D:\OpenServer\domains\easysite\app\template\404.inc.php on line 8
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: description in D:\OpenServer\domains\easysite\app\template\404.inc.php on line 9
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\404.inc.php on line 39
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: content in D:\OpenServer\domains\easysite\app\template\404.inc.php on line 45
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: page_blocks in D:\OpenServer\domains\easysite\app\template\404.inc.php on line 49
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: page_blocks in D:\OpenServer\domains\easysite\app\template\404.inc.php on line 50
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 7
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: keywords in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 8
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: description in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 9
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 39
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: content in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 45
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: page_blocks in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 49
+[30-Apr-2019 22:37:52 Europe/Moscow] PHP Notice:  Undefined variable: page_blocks in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 50
+[30-Apr-2019 22:39:52 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\404.inc.php on line 7
+[30-Apr-2019 22:39:52 Europe/Moscow] PHP Notice:  Undefined variable: keywords in D:\OpenServer\domains\easysite\app\template\404.inc.php on line 8
+[30-Apr-2019 22:39:52 Europe/Moscow] PHP Notice:  Undefined variable: description in D:\OpenServer\domains\easysite\app\template\404.inc.php on line 9
+[30-Apr-2019 22:39:52 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 7
+[30-Apr-2019 22:39:52 Europe/Moscow] PHP Notice:  Undefined variable: keywords in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 8
+[30-Apr-2019 22:39:52 Europe/Moscow] PHP Notice:  Undefined variable: description in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 9
+[30-Apr-2019 22:39:52 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 39
+[30-Apr-2019 22:39:52 Europe/Moscow] PHP Notice:  Undefined variable: content in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 45
+[30-Apr-2019 22:39:52 Europe/Moscow] PHP Notice:  Undefined variable: page_blocks in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 49
+[30-Apr-2019 22:39:52 Europe/Moscow] PHP Notice:  Undefined variable: page_blocks in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 50
+[30-Apr-2019 22:40:38 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 7
+[30-Apr-2019 22:40:38 Europe/Moscow] PHP Notice:  Undefined variable: keywords in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 8
+[30-Apr-2019 22:40:38 Europe/Moscow] PHP Notice:  Undefined variable: description in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 9
+[30-Apr-2019 22:40:38 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 39
+[30-Apr-2019 22:40:38 Europe/Moscow] PHP Notice:  Undefined variable: content in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 45
+[30-Apr-2019 22:40:38 Europe/Moscow] PHP Notice:  Undefined variable: page_blocks in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 49
+[30-Apr-2019 22:40:38 Europe/Moscow] PHP Notice:  Undefined variable: page_blocks in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 50
+[30-Apr-2019 22:40:40 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 7
+[30-Apr-2019 22:40:40 Europe/Moscow] PHP Notice:  Undefined variable: keywords in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 8
+[30-Apr-2019 22:40:40 Europe/Moscow] PHP Notice:  Undefined variable: description in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 9
+[30-Apr-2019 22:40:40 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 39
+[30-Apr-2019 22:40:40 Europe/Moscow] PHP Notice:  Undefined variable: content in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 45
+[30-Apr-2019 22:40:40 Europe/Moscow] PHP Notice:  Undefined variable: page_blocks in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 49
+[30-Apr-2019 22:40:40 Europe/Moscow] PHP Notice:  Undefined variable: page_blocks in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 50
+[30-Apr-2019 22:41:53 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 7
+[30-Apr-2019 22:41:53 Europe/Moscow] PHP Notice:  Undefined variable: keywords in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 8
+[30-Apr-2019 22:41:53 Europe/Moscow] PHP Notice:  Undefined variable: description in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 9
+[30-Apr-2019 22:41:53 Europe/Moscow] PHP Notice:  Undefined variable: title in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 39
+[30-Apr-2019 22:41:53 Europe/Moscow] PHP Notice:  Undefined variable: content in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 45
+[30-Apr-2019 22:41:53 Europe/Moscow] PHP Notice:  Undefined variable: page_blocks in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 49
+[30-Apr-2019 22:41:53 Europe/Moscow] PHP Notice:  Undefined variable: page_blocks in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 50
+[01-May-2019 16:49:01 Europe/Moscow] PHP Notice:  Undefined variable: Spisok_katjegorij_tovarov in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 49
+[01-May-2019 16:51:12 Europe/Moscow] PHP Notice:  Undefined variable: Spisok_katjegorij_tovarov in D:\OpenServer\domains\easysite\app\template\page.inc.php on line 49
+[01-May-2019 16:59:48 Europe/Moscow] PHP Notice:  Undefined index: secretWord in D:\OpenServer\domains\easysite\app\content\contact.inc.php on line 65
+[01-May-2019 16:59:49 Europe/Moscow] PHP Warning:  include_once(D:\OpenServer\domains\easysite\app/template/email/form.inc.php): failed to open stream: No such file or directory in D:\OpenServer\domains\easysite\app\content\contact.inc.php on line 69
+[01-May-2019 16:59:49 Europe/Moscow] PHP Warning:  include_once(): Failed opening 'D:\OpenServer\domains\easysite\app/template/email/form.inc.php' for inclusion (include_path='.;d:/openserver/modules/php/PHP-7-x64;d:/openserver/modules/php/PHP-7-x64/PEAR/pear') in D:\OpenServer\domains\easysite\app\content\contact.inc.php on line 69
+[01-May-2019 21:40:03 Europe/Moscow] PHP Parse error:  syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in D:\OpenServer\domains\easysite\app\content\contact.inc.php on line 14
+[01-May-2019 21:40:38 Europe/Moscow] PHP Parse error:  syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in D:\OpenServer\domains\easysite\app\content\contact.inc.php on line 14
+[01-May-2019 21:41:15 Europe/Moscow] PHP Parse error:  syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in D:\OpenServer\domains\easysite\app\content\contact.inc.php on line 14
+[01-May-2019 21:42:10 Europe/Moscow] PHP Parse error:  syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in D:\OpenServer\domains\easysite\app\content\contact.inc.php on line 14
+[01-May-2019 21:42:15 Europe/Moscow] PHP Parse error:  syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in D:\OpenServer\domains\easysite\app\content\contact.inc.php on line 14
+[01-May-2019 21:42:19 Europe/Moscow] PHP Parse error:  syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in D:\OpenServer\domains\easysite\app\content\contact.inc.php on line 14
+[01-May-2019 21:43:01 Europe/Moscow] PHP Notice:  Undefined index: emailadmin in D:\OpenServer\domains\easysite\app\content\contact.inc.php on line 15
+[01-May-2019 21:43:01 Europe/Moscow] PHP Notice:  Undefined index: emailsubject in D:\OpenServer\domains\easysite\app\content\contact.inc.php on line 16

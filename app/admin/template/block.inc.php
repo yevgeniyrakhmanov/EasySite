@@ -1,49 +1,72 @@
 <script src='<? $config['sitelink']; ?>tinymce/tinymce.min.js'></script>
-<script>
-	tinymce.init({
-		selector: 'textarea',
-		language: 'ru',
+<form action="" method="post" class="alert alert-success">
+<?php foreach ($vars as $i => $var) : ?>
+	<div class="well well-inverse<?=(!isset($_GET['block']) || $_GET['block']!=$i)?' d-none':''?>">
+		<script>
+			tinymce.init({
+				selector: '#text_<?= $i?>',
+				language: 'ru',
 
-		plugins: [
-		    "advlist autolink lists link charmap print preview anchor image code",
-		    "searchreplace visualblocks code fullscreen",
-		    "insertdatetime media table contextmenu paste wordcount"
-		],
-		toolbar: "preview | undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | code image",
+				plugins: [
+				    "advlist autolink lists link image charmap print preview anchor",
+				    "searchreplace visualblocks code fullscreen",
+				    "insertdatetime media table contextmenu paste image imagetools wordcount"
+				],
+				toolbar: "preview | undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image",
 
-		automatic_uploads: true,
-		images_upload_url: 'postAcceptor.php',
-		images_reuse_filename: true,
-		//images_upload_base_path: '../img'
+			});
+		</script>
+		<p class="text-center mb-0">Редактирование блока</p>
+		<h2 class="text-center mt-0">«<?= url2str($i)?>»</h2>		
+		<div class="form-group d-none">
+			<label for="page-parent">Название блока:</label>
+			<input type="text" class="form-control" name="block[<?= $i?>][name]" value="<?= $i?>" readonly>
+			
+		</div>
+		<div class="control-group">
+			<label for="page-parent">Текст блока:</label>
+			<textarea name="block[<?= $i?>][content]" <?=(!isset($_GET['block']) || $_GET['block']!=$i)?'':'class="span8 editor-textarea" rows="10"'?> id="text_<?= $i?>"><?= $var ?></textarea>
+		</div>
+	</div>
+<?endforeach?>
+<?if(!isset($_GET['block'])):?>
+	<script>
+		tinymce.init({
+			selector: '#text',
+			language: 'ru',
 
-	});
-</script>
-<form action="" method="post">
-	<?php foreach ($vars as $i => $var) : ?>
-		<div class="form-group<?=(!isset($_GET['block']) || $_GET['block']!=$i)?' hide':''?>">
-			<input class="form-control" type="text" name="block[<?= $i?>][name]" value="<?= $i?>" placeholder="Название блока">
-			<p class="text-danger small">Только латинские буквы любого регистра, цифры, минус и подчёркивание</p>
-		</div>
-		<div class="form-group">
-			<textarea class="form-control editor-textarea" name="block[<?= $i?>][content]" <?=(!isset($_GET['block']) || $_GET['block']!=$i)?'':' rows="10"'?> id="text_<?= $i?>" placeholder="Текст блока"><?= $var ?></textarea>
-			<p class="text-success small">Текст в HTML формате. Элементы массива <code>{$config['sitelink']}</code> оборачивайте фигурными скобками. Можно добавлять меню с помощью конструкции <code>{$get_menu_items($this_page, $название меню)}</code></p>
-		</div>
-	<?endforeach?>
-	<?if(!isset($_GET['block'])):?>
-		<div class="form-group">
-			<input class="form-control" type="text" name="block[add_new_block][name]" value="" placeholder="Название блока">
-			<p class="text-danger small">Только латинские буквы любого регистра, цифры, минус и подчёркивание</p>
-		</div>
-		<div class="form-group">
-			<textarea class="form-control editor-textarea" rows="10" name="block[add_new_block][content]" id="text" placeholder="Текст блока"></textarea>
-			<p class="text-success small">Текст в HTML формате. Элементы массива <code>{$config['sitelink']}</code> оборачивайте фигурными скобками. Можно добавлять меню с помощью конструкции <code>{$get_menu_items($this_page, $название меню)}</code></p>
-		</div>
-	<?endif?>
-	<div class="form-actions type2">		
+			plugins: [
+			    "advlist autolink lists link image charmap print preview anchor",
+			    "searchreplace visualblocks code fullscreen",
+			    "insertdatetime media table contextmenu paste image imagetools wordcount"
+			],
+			toolbar: "preview | undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image",
+
+		});
+	</script>
+	<div class="form-group">
+		<label for="page-parent">Название блока:</label>
+		<input type="text" class="form-control" name="block[add_new_block][name]" value="" required>
+	</div>
+	<div class="form-group">
+		<label for="page-parent">Текст блока</label>
+		<textarea rows="10" name="block[add_new_block][content]" id="text"></textarea>
+	</div>
+<?endif?>
+	<div class="mt-3">
 		<input type="submit" class="btn btn-success" name="save" value="Сохранить" title="Сохранить/создать страницу">
-		<?if(isset($_GET['block'])):?>
+<?if(isset($_GET['block'])):?>
 		<input type="hidden" name="delete_block" value="<?=$_GET['block']?>" >
-		<input type="submit" name="delete" class="btn btn-danger" value="Удалить" class="delete" onclick="return confirm('Вы действительно хотите удалить блок?')">
-		<?endif?>
+		<input type="submit" name="delete" class="btn btn-danger" value="Удалить" onclick="return confirm('Вы действительно хотите удалить блок?')">
+<?endif?>
 	</div>
 </form>
+
+
+	</div>
+</div>
+
+
+
+
+

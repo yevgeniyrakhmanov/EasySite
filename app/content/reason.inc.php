@@ -4,7 +4,7 @@
 $title = 'Для каких целей';
 $keywords = 'ключевые слова';
 $description = 'Описание страницы';
-$template = 'info';
+$template = 'page';
 $page_blocks = 'reviews, donate';
 
 # Содержание страницы

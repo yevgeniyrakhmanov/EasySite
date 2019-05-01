@@ -296,27 +296,79 @@ function GetTemplates()
 	return $templates;
 }
 
-#Дополнительные модули
 
-# Выбор параметров страницы
-function GetContent($page, $var, $dir = '') {
-	$text = file_get_contents(dirname(__FILE__) . "/content/$dir$page");
+
+# Д О П О Л Н И Т Е Л Ь Н Ы Е   М О Д У Л И
+
+# Транслитерация с латиницы на русский
+function lat2rus($string) {
+    $converter = array(
+        'а' => 'a',   'b' => 'б',   'v' => 'в',
+        'g' => 'г',   'd' => 'д',   'je' => 'е',
+        'jo' => 'ё',  'zh' => 'ж',  'z' => 'з',
+        'i' => 'и',   'j' => 'й',   'k' => 'к',
+        'l' => 'л',   'm' => 'м',   'n' => 'н',
+        'o' => 'о',   'p' => 'п',   'r' => 'р',
+        's' => 'с',   't' => 'т',   'u' => 'у',
+        'f' => 'ф',   'h' => 'х',   'c' => 'ц',
+        'ch' => 'ч',  'sh' => 'ш',  'shh' => 'щ',
+        'w' => 'ь',  'y' => 'ы',   'q' => 'ъ',
+        'e' => 'э',  'ju' => 'ю', 'ja' => 'я',
+        '_'  => ' ',  '-' => '-', '/' => '',
+
+        'A' => 'А',   'B' => 'Б',   'V' => 'В',
+        'G' => 'Г',   'D' => 'Д',   'JE' => 'Е',
+        'JO' => 'Ё',  'ZH' => 'Ж',  'Z' => 'З',
+        'I' => 'И',   'J' => 'Й',   'K' => 'К',
+        'L' => 'Л',   'M' => 'М',   'N' => 'Н',
+        'O' => 'О',   'P' => 'П',   'R' => 'Р',
+        'S' => 'С',   'T' => 'Т',   'U' => 'У',
+        'F' => 'Ф',   'H' => 'Х',   'C' => 'Ц',
+        'CH' => 'Ч',  'SH' => 'Ш',  'SHH' => 'Щ',
+        'W' => 'Ь',  'Y' => 'Ы',   'Q' => 'Ъ',
+        'E' => 'Э',  'JU' => 'Ю', 'JA' => 'Я',
+    );
+    return strtr($string, $converter);
+}
+function url2str($str) {
+    # переводим в транслит
+    $str = lat2rus($str);
+    return $str;
+}
+
+
+# ----- Вывод публикаций и рубрик -----
+
+# Выбор параметров публикации
+function GetPosts($page, $var, $dir)
+{
+	$text = file_get_contents(dirname(__FILE__) . '/contentposts/'.$dir.'/'.$page);
 	preg_match('|\$'.$var.'[^\n]*\'([^\n]*)\';|Uisu', $text, $matches);
 	return (isset($matches[1])) ? $matches[1] : '';
 }
 
-# Сортировка страниц по дате создания файлов (вывод на страницу: GetSort('Название папки'))
-function GetSort($dir) {
-	$path = $dir;
+# Сортировка публикаций по дате создания файлов ( вывод на страницу: {$get_post_list('Nazvanie_papki/')} )
+function GetPostList($dir) {
+
+	global $config;
+
+	$postlist = '';
+	$postmarkup = '';
+
+	$path = dirname(__FILE__) . '/contentposts/' . $dir;
+
 	$pages = array();
 
-	# Парсим папку content
+	# Парсим папку contentposts
 	$handle = opendir($path);
 
-	# Выбираем массив страниц
-	if ($handle != false) {
-		while (($file = readdir($handle)) !== false) {
-			if (is_file($path . $file)) {
+	# Выбираем массив публикаций
+	if ($handle != false)
+	{
+		while (($file = readdir($handle)) !== false)
+		{
+			if (is_file($path . $file))
+			{
 				$i = filemtime($path . $file) . ',' . $file;
 				$pages[$i] = $file;
 			}
@@ -324,11 +376,306 @@ function GetSort($dir) {
 		closedir($handle);
 	}
 
-	# Сортируем массив
+	# Сортируем массив по дате создания файлов
 	krsort($pages);
 
-    foreach ($pages as $i => $page) {
-		$title = GetContent($page, 'title');
-		echo '<p>'.$title.'</p>';
+	// $rudir = url2str($dir);
+	$postmarkup .= '
+	<div class="rubrics">
+		<ul class="posts nav flex-column">';
+
+    foreach ($pages as $i => $page)
+    {
+		# Выбираем, какие параметры публикации хотим видеть
+		$title = GetPosts($page, 'title', $dir);
+		$date = GetPosts($page, 'date', $dir);
+		$caterory = GetPosts($page, 'category', $dir);
+		$description = GetPosts($page, 'description', $dir);
+
+		# Убираем расширение файла и формируем урл публикации
+		$fileaddon = strpos($page, ".");
+		$filename = substr($page, 0, $fileaddon);
+		$posturl = $config['sitelink'].$dir.$filename;
+
+		# Верстаем шаблон вывода списка публикаций
+		$postmarkup .= '
+			<li>
+				<h3><a href="'.$posturl.'" title="'.$title.'">'.$title.'</a></h3>
+				<p class="text-small">'.$caterory.' | '.$date.' </p>
+				<p>'.$description.' <a href="'.$posturl.'" title="'.$title.'"> Подробнее </a></p>
+			</li>
+		';
     }
+
+	if (empty($pages))
+	$postlist .= '
+			<li>В этой рубрике нет страниц.</li>';
+
+    $postlist .= $postmarkup;
+
+    # Выводим список публикаций, отсортированный по дате создания файлов
+    return 
+    		$postlist.'
+		</ul>
+	</div>';
 }
+
+# Вывод списка рубрик
+function GetRubric() {
+
+	global $config;
+
+	$dirlist = '';
+	$dirmarkup = '';
+
+	$path = dirname(__FILE__) . '/contentposts/';
+	$dirs = array();
+
+
+	# Парсим папку content
+	$handle = opendir($path);
+
+	# Выбираем массив файлов
+	if ($handle != false)
+	{
+		while (($dir = readdir($handle)) !== false)
+			if (is_dir($path . $dir) && $dir != '..' && $dir != '.')
+				$dirs[] = $dir;
+
+		closedir($handle);
+	}
+
+	foreach ($dirs as $i => $dir){
+		$rudir = url2str($dir);
+		$rubriclink = $config['sitelink'].$dir;
+		$dirmarkup .= '
+			<li><a href="'.$rubriclink.'">'.$rudir.'</a></li>';
+	}
+
+	$dirlist .= $dirmarkup;
+
+	return $dirlist;
+
+}
+
+# Вывод всех публикаций, но пока только отсортированных по рубрикам
+function GetAllPosts()
+{
+	$path = dirname(__FILE__) . '/contentposts/';
+	$readdirectory = dir($path);
+	while(false !== ($dir = $readdirectory->read()))
+	{
+		if($dir != "." && $dir != "..")
+		{
+			$subpages = GetPostList($dir.'/');
+			print $subpages;
+		}
+	}
+}
+
+
+# ----- Вывод товаров и категорий -----
+
+# Выбор параметров товара
+function GetProducts($page, $var, $dir)
+{
+	$text = file_get_contents(dirname(__FILE__) . '/contentproducts/'.$dir.'/'.$page);
+	preg_match('|\$'.$var.'[^\n]*\'([^\n]*)\';|Uisu', $text, $matches);
+	return (isset($matches[1])) ? $matches[1] : '';
+}
+
+# Сортировка товаров по дате создания файлов ( вывод на страницу: {$get_product_list('Nazvanie_papki/')} )
+function GetProductList($dir) {
+
+	global $config;
+
+	$postlist = '';
+	$postmarkup = '';
+
+	$path = dirname(__FILE__) . '/contentproducts/' . $dir;
+
+	$pages = array();
+
+	# Парсим папку contentproducts
+	$handle = opendir($path);
+
+	# Выбираем массив публикаций
+	if ($handle != false)
+	{
+		while (($file = readdir($handle)) !== false)
+		{
+			if (is_file($path . $file))
+			{
+				$i = filemtime($path . $file) . ',' . $file;
+				$pages[$i] = $file;
+			}
+		}
+		closedir($handle);
+	}
+
+	# Сортируем массив по дате создания файлов
+	krsort($pages);
+
+	$rudir = url2str($dir);
+	$postmarkup .= '
+	<div class="categories">
+		<ul class="products nav flex-column">';
+
+    foreach ($pages as $i => $page)
+    {
+		# Выбираем, какие параметры товара хотим видеть
+		$title = GetProducts($page, 'title', $dir);
+		$caterory = GetProducts($page, 'category', $dir);
+		$description = GetProducts($page, 'description', $dir);
+
+		# Убираем расширение файла и формируем урл товара
+		$fileaddon = strpos($page, ".");
+		$filename = substr($page, 0, $fileaddon);
+		$posturl = $config['sitelink'].$dir.$filename;
+
+		# Верстаем шаблон вывода списка товаров
+		$postmarkup .= '
+			<li>
+				<h3><a href="'.$posturl.'" title="'.$title.'">'.$title.'</a></h3>
+				<p class="text-small">'.$caterory.'</p>
+				<p>'.$description.' <a href="'.$posturl.'" title="'.$title.'"> Подробнее </a></p>
+			</li>
+		';
+    }
+
+	if (empty($pages))
+	$postlist .= '
+			<li>В этой категории нет товаров.</li>';
+
+    $postlist .= $postmarkup;
+
+    # Выводим список товаров, отсортированный по дате создания файлов
+    return 
+    		$postlist.'
+		</ul>
+	</div>';
+}
+
+# Вывод товаров в категории
+function GetCategories() {
+
+	global $config;
+	
+	$dirlist = '';
+	$dirmarkup = '';
+
+	$path = dirname(__FILE__) . '/contentproducts/';
+	$dirs = array();
+
+
+	# Парсим папку contentproducts
+	$handle = opendir($path);
+
+	# Выбираем массив файлов
+	if ($handle != false)
+	{
+		while (($dir = readdir($handle)) !== false)
+			if (is_dir($path . $dir) && $dir != '..' && $dir != '.')
+				$dirs[] = $dir;
+
+		closedir($handle);
+	}
+
+	foreach ($dirs as $i => $dir){
+		$rudir = url2str($dir);
+		$categorylink = $config['sitelink'].'shop/'.$dir;
+		$dirmarkup .= '
+			<li><a href="'.$categorylink.'">'.$rudir.'</a></li>';
+	}
+
+	$dirlist .= 
+		'<ul class="products nav flex-column">'
+			. $dirmarkup .
+		'</ul>';
+
+	return $dirlist;
+
+}
+
+# Вывод всех товаров, но пока отсортированных по категориям
+function GetAllProducts()
+{
+	$path = dirname(__FILE__) . '/contentproducts/';
+	$readdirectory = dir($path);
+	while(false !== ($dir = $readdirectory->read()))
+	{
+		if($dir != "." && $dir != "..")
+		{
+			$subpages = GetProductList($dir.'/');
+			print $subpages;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function GetGallery()
+{
+	$wimg = "";
+	$fimg = "";
+	$path = "/img/gallery/"; // задаем путь до сканируемой папки с изображениями
+	$images = scandir(__DIR__ . $path); // сканируем папку
+	if ($images !== false) { // если нет ошибок при сканировании
+		$images = preg_grep("/\.(?:png|gif|jpe?g)$/i", $images); // через регулярку создаем массив только изображений
+		if (is_array($images)) { // если изображения найдены
+			foreach($images as $image) { // делаем проход по массиву
+				$pathinfo = pathinfo($image, PATHINFO_FILENAME);
+				$imgname = lat2rus($pathinfo);
+				$fimg .= '
+					<a href="'.$path.htmlspecialchars(urlencode($image)).'" title="'.$imgname.'" class="media">
+						<img src="'.$path.htmlspecialchars(urlencode($image)).'" alt="'.$imgname.'">
+					</a>';
+				}
+				$wimg .= $fimg;
+		} else { // иначе, если нет изображений
+			$wimg .= "<p>Не обнаружено изображений в директории!</p>";
+		}
+	} else { // иначе, если директория пуста или произошла ошибка
+		$wimg .= "<p>Директория пуста или произошла ошибка при сканировании.</p>";
+	}
+    return $wimg; // выводим полученный результат
+}
+

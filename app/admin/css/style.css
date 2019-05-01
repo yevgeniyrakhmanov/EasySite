@@ -1,0 +1,42 @@
+* {
+	border-radius: 0 !important;
+}
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+	overflow-y: scroll;
+}
+.navbar-brand {
+	height: 50px;
+	width: 50px;
+}
+label {
+	font-weight: bold;
+    margin-bottom: 0 !important;
+    margin-left: 13px;
+}
+input::-moz-placeholder {
+    color: #ccc !important;
+}
+input::-webkit-input-placeholder {
+    color: #ccc !important;
+}
+input:focus::-moz-placeholder {
+    opacity: 0;
+}
+input:focus::-webkit-input-placeholder {
+    opacity: 0;
+}
+.form-control.btn.show-password {
+    text-align: left !important;
+    transition: all .3s;
+}
+.form-control.btn.show-password:focus {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    text-align: left;
+}
+.form-control.btn.show-password:hover {
+    color: #ff0000;
+    text-shadow: 0 0 1em red;
+}
